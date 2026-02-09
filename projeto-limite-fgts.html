@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limite da Conta + CP FGTS | Adriana Cellini</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--light-gray);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section p, .section li {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .section ul {
+            padding-left: 2rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box strong {
+            color: var(--primary);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-side {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .comparison-side h3 {
+            margin-top: 0;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .as-is {
+            border-top: 4px solid var(--warning);
+        }
+
+        .to-be {
+            border-top: 4px solid var(--success);
+        }
+
+        .flow-step {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .flow-step-number {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+        }
+
+        .data-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .data-table tr:hover {
+            background: var(--light-gray);
+        }
+
+        .impact-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html#projetos" class="back-link">← Voltar para o portfólio</a>
+        <h1>Limite da Conta + CP FGTS</h1>
+        <p class="subtitle">Abordagem Proativa para Negativas de Limite</p>
+    </div>
+
+    <div class="container">
+        <!-- Contexto -->
+        <div class="section">
+            <h2>🎯 Contexto e Desafio</h2>
+            <p>
+                Clientes que solicitam aumento de limite da conta e têm o pedido negado frequentemente buscam outras linhas de crédito por conta própria, gerando fricção e aumentando o esforço do cliente.
+            </p>
+            <div class="highlight-box">
+                <strong>Oportunidade identificada:</strong> Implementar uma abordagem proativa no chatbot para apresentar alternativas de crédito automaticamente quando o pedido de aumento de limite for negado, reduzindo o esforço do cliente e aumentando a conversão.
+            </div>
+        </div>
+
+        <!-- Solução -->
+        <div class="section">
+            <h2>💡 Solução Implementada</h2>
+            <p>
+                Sempre que um cliente tiver a solicitação de aumento de limite da conta negada, ele receberá automaticamente a oferta de crédito via antecipação do FGTS (CP FGTS), sem a necessidade de busca manual.
+            </p>
+
+            <h3>Benefícios da Solução</h3>
+            <ul>
+                <li><strong>Experiência aprimorada:</strong> Redução do esforço do cliente ao apresentar a alternativa no momento certo</li>
+                <li><strong>Maior conversão:</strong> Aumento na adesão ao crédito FGTS</li>
+                <li><strong>Eficiência operacional:</strong> Diminuição da procura por outros canais para esclarecimento e busca de crédito</li>
+            </ul>
+        </div>
+
+        <!-- Comparação AS IS vs TO BE -->
+        <div class="section">
+            <h2>🔄 Jornada: Antes e Depois</h2>
+            
+            <div class="comparison">
+                <div class="comparison-side as-is">
+                    <h3>
+                        <span>❌</span>
+                        AS IS (Antes)
+                    </h3>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1.5rem;">Jornada original sem oferta proativa</p>
+                    
+                    <div class="flow-step">
+                        <div class="flow-step-number">Passo 1</div>
+                        <p>Cliente solicita aumento do limite da conta</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-step-number">Passo 2</div>
+                        <p>Sistema processa e retorna negativa</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-step-number">Passo 3</div>
+                        <p>Cliente recebe mensagem de negativa</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-step-number">Passo 4</div>
+                        <p>Fim da jornada - cliente precisa buscar alternativas por conta própria</p>
+                    </div>
+
+                    <div class="highlight-box" style="background: rgba(245, 158, 11, 0.1); border-left-color: var(--warning);">
+                        <strong>Problema:</strong> Cliente frustrado precisa procurar ativamente por outras opções de crédito, gerando fricção e abandono.
+                    </div>
+                </div>
+
+                <div class="comparison-side to-be">
+                    <h3>
+                        <span>✅</span>
+                        TO BE (Depois)
+                    </h3>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1.5rem;">Nova jornada com oferta proativa</p>
+                    
+                    <div class="flow-step">
+                        <div class="flow-step-number">Passo 1</div>
+                        <p>Cliente solicita aumento do limite da conta</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-step-number">Passo 2</div>
+                        <p>Sistema processa e retorna negativa</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-step-number">Passo 3</div>
+                        <p>Cliente recebe mensagem de negativa + <strong>botão de CP FGTS</strong></p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-step-number">Passo 4</div>
+                        <p>Cliente pode acessar diretamente a oferta de crédito FGTS</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-step-number">Passo 5</div>
+                        <p>Resumo, comprovante e acesso ao link para JUC (Jornada Única do Cliente)</p>
+                    </div>
+
+                    <div class="highlight-box" style="background: rgba(16, 185, 129, 0.1); border-left-color: var(--success);">
+                        <strong>Solução:</strong> Cliente recebe alternativa imediata e relevante, mantendo-o engajado e facilitando a contratação.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Métricas e Resultados -->
+        <div class="section">
+            <h2>📊 Métricas e Resultados</h2>
+            <p><strong>Período de análise:</strong> 06/03/2025 a 28/03/2025</p>
+            <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 2rem;"><em>Início do piloto: 19 horas do dia 06/03</em></p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">922K</div>
+                    <div class="metric-label">Cliques totais no período</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">+809</div>
+                    <div class="metric-label">Aumento em contratos</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">32%</div>
+                    <div class="metric-label">Taxa de acesso à JUC</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">6%</div>
+                    <div class="metric-label">Taxa final de conversão</div>
+                </div>
+            </div>
+
+            <h3>Funil de Conversão Detalhado</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Etapa</th>
+                        <th>Volume</th>
+                        <th>Taxa de Conversão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cliques totais</strong></td>
+                        <td>922.025</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Negativa de limite</td>
+                        <td>119.900</td>
+                        <td>13%</td>
+                    </tr>
+                    <tr>
+                        <td>Novo botão de CP FGTS</td>
+                        <td>42.750</td>
+                        <td>36%</td>
+                    </tr>
+                    <tr>
+                        <td>Acesso ao JUC</td>
+                        <td>34.428</td>
+                        <td>80%</td>
+                    </tr>
+                    <tr>
+                        <td>Resumo</td>
+                        <td>11.072</td>
+                        <td>32%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Comprovante (Conversão final)</strong></td>
+                        <td><strong>642</strong></td>
+                        <td><strong>6%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <strong>NPS da jornada:</strong> Métrica positiva indicando satisfação do cliente com a nova abordagem proativa.
+            </div>
+        </div>
+
+        <!-- Comportamento do Cliente - Dicas -->
+        <div class="section">
+            <h2>💡 Comportamento do Cliente: Ver Dicas</h2>
+            <p>
+                Análise do comportamento do cliente ao tomar negativa de limite e acessar a funcionalidade "Ver Dicas".
+            </p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">1.58M</div>
+                    <div class="metric-label">Acessaram a jornada</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">1.48M</div>
+                    <div class="metric-label">Tomaram negativa</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">94%</div>
+                    <div class="metric-label">Taxa de negativa</div>
+                </div>
+            </div>
+
+            <h3>Visão Mensal de Acessos às Dicas (em mil)</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Período</th>
+                        <th>Total de Acessos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nov/24</td>
+                        <td>176.000</td>
+                    </tr>
+                    <tr>
+                        <td>Dez/24</td>
+                        <td>169.000</td>
+                    </tr>
+                    <tr>
+                        <td>Jan/25</td>
+                        <td>155.000</td>
+                    </tr>
+                    <tr>
+                        <td>Fev/25</td>
+                        <td>175.000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Acessos por Tipo de Dica</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Dica</th>
+                        <th>Acessos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Atualizar renda</td>
+                        <td>89.037</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Manter contas em dia</strong></td>
+                        <td><strong>45.943</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Cadastrar chave Pix</td>
+                        <td>25.291</td>
+                    </tr>
+                    <tr>
+                        <td>Ser Open Finance</td>
+                        <td>14.384</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <strong>Insight:</strong> Em fev/25 houve mais acessos na dica "Manter contas em dia" do que nos outros meses. Voltamos ao patamar normal de acessos no menu "Dicas" após meses sazonais (Jan e Fev).
+            </div>
+        </div>
+
+        <!-- Aprendizados -->
+        <div class="section">
+            <h2>📚 Aprendizados e Insights</h2>
+            
+            <h3>Pontos de Atenção Identificados</h3>
+            <ul>
+                <li>Clientes podem estar acessando JUC fora do horário de contratação (07h às 21h, Segunda a Sexta)</li>
+                <li>Influência do período de aniversário do cliente na contratação</li>
+                <li>Possível falta de interesse devido a valores baixos disponíveis para contratação</li>
+                <li>Necessidade de autenticação no app da Caixa pode gerar fricção</li>
+            </ul>
+
+            <h3>Impactos Positivos</h3>
+            <div class="impact-badge">Experiência Aprimorada</div>
+            <div class="impact-badge">Redução de Esforço</div>
+            <div class="impact-badge">Aumento de Conversão</div>
+            <div class="impact-badge">Eficiência Operacional</div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="index.html#projetos" class="back-link" style="color: var(--primary); font-size: 1.1rem; font-weight: 600;">← Voltar para o portfólio</a>
+        </div>
+    </div>
+</body>
+</html>

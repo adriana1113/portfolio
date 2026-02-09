@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descoberta Conversacional - Biblioteca de Componentes | Adriana Cellini</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--light-gray);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section p, .section li {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .section ul {
+            padding-left: 2rem;
+        }
+
+        .methodology {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .phase {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .phase h4 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .phase li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .benchmark-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .benchmark-card {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .benchmark-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .benchmark-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .component-card {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 15px;
+            border-top: 4px solid var(--primary);
+        }
+
+        .component-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .component-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .component-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .deliverables {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .deliverable {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .deliverable-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .deliverable h4 {
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .deliverable p {
+            color: white;
+            opacity: 0.95;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box strong {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .methodology {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html#projetos" class="back-link">← Voltar para o portfólio</a>
+        <h1>Descoberta Conversacional</h1>
+        <p class="subtitle">Biblioteca de Componentes do Chatbot Santander</p>
+    </div>
+
+    <div class="container">
+        <!-- Objetivo -->
+        <div class="section">
+            <h2>🎯 Objetivo do Projeto</h2>
+            <p>
+                Criar uma biblioteca de componentes oficial e padronizada para o chatbot do Santander Brasil, solucionando problemas de inconsistência visual e de conteúdo identificados em diferentes canais (App e WhatsApp). O projeto nasceu da necessidade de estabelecer padrões claros de design e regras de utilização para cada elemento do bot.
+            </p>
+            <div class="highlight-box">
+                <strong>Problema identificado:</strong> Despadronização frequente dos componentes do chatbot e falta de documentação de design definindo padrões, o que dificultava o trabalho das UX Writers que precisavam trabalhar sobre interfaces anteriores nem sempre atualizadas.
+            </div>
+        </div>
+
+        <!-- Metodologia Double Diamond -->
+        <div class="section">
+            <h2>💎 Metodologia: Double Diamond</h2>
+            <p>
+                O projeto foi estruturado seguindo o modelo Double Diamond, que organiza o processo criativo em quatro fases distintas, permitindo uma exploração ampla de problemas seguida de definição clara de objetivos antes de desenvolver e entregar soluções eficazes.
+            </p>
+
+            <div class="methodology">
+                <div class="phase">
+                    <h4>1. Descobrir</h4>
+                    <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 1rem;">Análise do ecossistema e benchmarking</p>
+                    <ul>
+                        <li>Mural de objetivos e resultados</li>
+                        <li>Mapa de stakeholders</li>
+                        <li>Análise de documentos existentes</li>
+                        <li>Análise de OKRs e métricas</li>
+                        <li>Análise das jornadas (App e WhatsApp)</li>
+                        <li>Benchmark com concorrentes</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <h4>2. Definir</h4>
+                    <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 1rem;">Definição de backlog e prioridades</p>
+                    <ul>
+                        <li>Lista de componentes necessários</li>
+                        <li>Matriz MoSCoW para priorização</li>
+                        <li>Definição baseada nos OKRs</li>
+                        <li>Identificação de gaps</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <h4>3. Desenvolver</h4>
+                    <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 1rem;">Criação de wireframes dos componentes</p>
+                    <ul>
+                        <li>Wireframes de baixa fidelidade</li>
+                        <li>Aplicação do Atomic Design</li>
+                        <li>Documentação de uso</li>
+                        <li>Heurísticas de usabilidade</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <h4>4. Entregar</h4>
+                    <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 1rem;">Consolidação do material final</p>
+                    <ul>
+                        <li>Protótipo no Figma</li>
+                        <li>Matriz MoSCoW completa</li>
+                        <li>Apresentações executivas</li>
+                        <li>Dossiê completo da descoberta</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Análise e Descoberta -->
+        <div class="section">
+            <h2>🔍 Fase de Descoberta</h2>
+            
+            <h3>Análise Interna</h3>
+            <p>Foram analisados diversos documentos existentes, incluindo:</p>
+            <ul>
+                <li>Guias de tom de voz e escrita conversacional</li>
+                <li>Pesquisas realizadas no chatbot (App e WhatsApp)</li>
+                <li>Dados de NPS e métricas de performance</li>
+                <li>Jornadas existentes em ambos os canais</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Métricas do chatbot:</strong> 94% das interações ocorrem no estruturado, 14,9% de IDK, grau de confiança de 67,4%, e 75% dos usuários carteirizados optam por falar com o chatbot.
+            </div>
+
+            <h3>Principais Inconsistências Identificadas</h3>
+            <p><strong>No App:</strong></p>
+            <ul>
+                <li>Deeplinks sem hiperlink adequado</li>
+                <li>Jornadas continuavam após mudança de assunto</li>
+                <li>Espaçamento de emojis despadronizado</li>
+                <li>Passo a passo com flechas e hífens (fora do padrão)</li>
+                <li>Textos muito longos com alta sobrecarga de leitura</li>
+                <li>Muitas opções de botões no menu</li>
+            </ul>
+
+            <p><strong>No WhatsApp:</strong></p>
+            <ul>
+                <li>Ausência de saudação inicial personalizada</li>
+                <li>Despadronização nos espaçamentos de emojis</li>
+                <li>Repetição excessiva do mesmo emoji</li>
+                <li>Bot limitado ao menu estruturado</li>
+                <li>Passo a passo com setas ao invés de bullet points</li>
+            </ul>
+        </div>
+
+        <!-- Benchmark -->
+        <div class="section">
+            <h2>📊 Benchmarking</h2>
+            <p>Análise detalhada de concorrentes diretos e indiretos para identificar oportunidades de melhoria e inovações.</p>
+
+            <div class="benchmark-grid">
+                <div class="benchmark-card">
+                    <div class="benchmark-number">6</div>
+                    <div class="benchmark-label">Concorrentes Diretos<br>(Bancos)</div>
+                </div>
+                <div class="benchmark-card">
+                    <div class="benchmark-number">11</div>
+                    <div class="benchmark-label">Concorrentes Indiretos<br>(Outros setores)</div>
+                </div>
+                <div class="benchmark-card">
+                    <div class="benchmark-number">2</div>
+                    <div class="benchmark-label">Canais Analisados<br>(App e WhatsApp)</div>
+                </div>
+            </div>
+
+            <h3>Principais Insights do Benchmark</h3>
+            <p><strong>Oportunidades identificadas:</strong></p>
+            <ul>
+                <li>Bradesco e PicPay já utilizam envio de áudio e LIBRAS (acessibilidade)</li>
+                <li>Santander está tecnologicamente atrás em funcionalidades, mas é forte em autosserviço</li>
+                <li>No WhatsApp, Santander é o único banco que não utiliza NLP</li>
+                <li>Todos os concorrentes utilizam componentes interativos no WhatsApp</li>
+                <li>Mercado Livre e Loreal já utilizam GenAI e WhatsApp Flows</li>
+            </ul>
+        </div>
+
+        <!-- Componentes Principais -->
+        <div class="section">
+            <h2>🧩 Componentes Desenvolvidos</h2>
+            <p>Principais componentes wireframados com foco em melhorar NPS, resolutividade e experiência do usuário.</p>
+
+            <div class="components-grid">
+                <div class="component-card">
+                    <div class="component-icon">📋</div>
+                    <h4>Bottom Sheet</h4>
+                    <p>Componente modal para jornadas longas e complexas dentro do bot, sem sair do canal. Inclui variações com slider, toggle switch, checkbox, progress bar e menu.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-icon">💬</div>
+                    <h4>WhatsApp Flows</h4>
+                    <p>Fluxos interativos personalizados para serviços integrados (cartão de crédito, avaliação, aumento de limite) mantendo o usuário no canal.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-icon">📅</div>
+                    <h4>Calendar</h4>
+                    <p>Seleção intuitiva de datas e intervalos, resolvendo o problema de escolha não intuitiva de períodos.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-icon">🎠</div>
+                    <h4>Card + Carrossel</h4>
+                    <p>Visualização de grandes volumes de informações de forma visual e minimalista, reduzindo sobrecarga de texto.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-icon">✓</div>
+                    <h4>Status de Mensagem</h4>
+                    <p>Indicadores visuais (enviado, recebido, lido) para dar visibilidade ao cliente sobre o status da conversa.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Abordagem utilizada:</strong> Atomic Design para garantir modularidade e consistência entre os componentes, permitindo fácil manutenção e escalabilidade da biblioteca.
+            </div>
+        </div>
+
+        <!-- Entregas -->
+        <div class="section">
+            <h2>📦 Entregas do Projeto</h2>
+            
+            <div class="deliverables">
+                <div class="deliverable">
+                    <div class="deliverable-icon">🎨</div>
+                    <h4>Figma</h4>
+                    <p>Protótipo de baixa fidelidade (wireframe) dos principais componentes</p>
+                </div>
+
+                <div class="deliverable">
+                    <div class="deliverable-icon">📊</div>
+                    <h4>Matriz MoSCoW</h4>
+                    <p>Backlog completo organizado por prioridades baseadas nos OKRs</p>
+                </div>
+
+                <div class="deliverable">
+                    <div class="deliverable-icon">📑</div>
+                    <h4>Apresentação</h4>
+                    <p>PPT detalhando componentes e descoberta completa</p>
+                </div>
+
+                <div class="deliverable">
+                    <div class="deliverable-icon">📚</div>
+                    <h4>Dossiê</h4>
+                    <p>Documentação detalhada de todo o processo de descoberta</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impactos -->
+        <div class="section">
+            <h2>🎯 Impactos e Resultados</h2>
+            <ul>
+                <li><strong>16 componentes redesenhados</strong> com documentação completa de uso</li>
+                <li><strong>Padronização</strong> de todos os elementos do chatbot</li>
+                <li><strong>Agilidade</strong> no trabalho das UX Writers através de biblioteca oficial</li>
+                <li><strong>Redução de inconsistências</strong> entre canais (App e WhatsApp)</li>
+                <li><strong>Base sólida</strong> para evolução contínua do conversacional</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>OKRs impactadas:</strong> NPS do chatbot, Resolutividade, Busca (Encontrabilidade e Uso), IDK do chatbot, WhatsApp, e Mix Chat/Voz.
+            </div>
+        </div>
+
+        <!-- Próximos Passos -->
+        <div class="section">
+            <h2>🚀 Próximos Passos</h2>
+            <ul>
+                <li>Prototipar os componentes priorizados em alta fidelidade</li>
+                <li>Realizar testes de usabilidade com o time Global</li>
+                <li>Incorporar feedback dos testes para priorização/despriorização das soluções</li>
+                <li>Entender com o time técnico os esforços de implementação</li>
+                <li>Delegar os itens de backlog às squads responsáveis</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="index.html#projetos" class="back-link" style="color: var(--primary); font-size: 1.1rem; font-weight: 600;">← Voltar para o portfólio</a>
+        </div>
+    </div>
+</body>
+</html>

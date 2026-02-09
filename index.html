@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adriana Cellini | UX Writer & Content Strategy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #8b5cf6;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header/Navigation */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--light-gray);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .project-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .metric {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* About Section */
+        #sobre {
+            background: var(--light-gray);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border-radius: 25px;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .additional-info {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .additional-info h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: auto;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 45%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        #contato {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #contato .section-title {
+            color: white;
+        }
+
+        #contato .section-title::after {
+            background: white;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            min-width: 250px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .contact-card a:hover {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-content {
+                width: calc(100% - 2rem);
+                margin-left: 2rem !important;
+                text-align: left !important;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Image in project cards */
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">AC</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Adriana Cellini Kanashiro</h1>
+            <p class="subtitle">UX Writer | Designer de Conversação | Content Strategy</p>
+            <p>Transformando dados, dores e conversas em experiências eficientes. Especialista em design conversacional, curadoria de chatbots e estratégia de conteúdo para canais digitais.</p>
+            <a href="#contato" class="cta-button">Vamos conversar</a>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">+150</div>
+                <div class="stat-label">Cards entregues em 2025<br>(Metodologia Ágil)</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.5</div>
+                <div class="stat-label">Anos de experiência em UX</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">70%</div>
+                <div class="stat-label">Arquitetura de bots criada independentemente</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Setores atendidos<br>(Financeiro, Educação, Telecom, Saúde, Previdência)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <section id="projetos">
+        <h2 class="section-title">Projetos em Destaque</h2>
+        
+        <div class="projects-grid">
+            <!-- Projeto 1: Descoberta Componentes -->
+            <a href="projeto-descoberta-componentes.html" class="project-card">
+                <div class="project-image">💬</div>
+                <div class="project-content">
+                    <span class="project-tag">Santander | NTT Data</span>
+                    <h3 class="project-title">Descoberta Conversacional - Biblioteca de Componentes</h3>
+                    <p class="project-description">
+                        Criação da biblioteca oficial de componentes do chatbot Santander utilizando metodologia Double Diamond e Atomic Design. Análise completa do ecossistema conversacional, benchmark de 17 concorrentes e wireframes de componentes interativos.
+                    </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">16</div>
+                            <div class="metric-label">Componentes redesenhados</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">17</div>
+                            <div class="metric-label">Concorrentes analisados</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Projeto 2: Finalização do Bot -->
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">✅</div>
+                <div class="project-content">
+                    <span class="project-tag">Santander | NTT Data</span>
+                    <h3 class="project-title">Finalização do Bot</h3>
+                    <p class="project-description">
+                        Implementação de mensagem de finalização adequada para resolver o problema de clientes presos em looping. Análise de benchmarking e reformulação do fluxo com mensagens claras e objetivas para diferentes cenários.
+                    </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">✓</div>
+                            <div class="metric-label">Nova métrica de abandono</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">✓</div>
+                            <div class="metric-label">Jornadas padronizadas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projeto 3: Limite da Conta + FGTS -->
+            <a href="projeto-limite-fgts.html" class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">💳</div>
+                <div class="project-content">
+                    <span class="project-tag">Santander | NTT Data</span>
+                    <h3 class="project-title">Limite da Conta + CP FGTS</h3>
+                    <p class="project-description">
+                        Implementação de abordagem proativa: oferta automática de crédito via antecipação FGTS para clientes com negativa de aumento de limite. Redução do esforço do cliente e aumento de conversão.
+                    </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">+809</div>
+                            <div class="metric-label">Aumento em contratos no período</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">32%</div>
+                            <div class="metric-label">Taxa de acesso à JUC</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Projeto 4: Melhorias Pix -->
+            <a href="projeto-pix.html" class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">📱</div>
+                <div class="project-content">
+                    <span class="project-tag">Santander | NTT Data</span>
+                    <h3 class="project-title">Melhorias nas Jornadas Pix</h3>
+                    <p class="project-description">
+                        Refinamento de jornadas sensíveis relacionadas ao Pix (Precisa de Ajuda e Registrar Reclamação), utilizando UX Writing para reduzir suporte humano e aumentar resolução no bot. Foco em fluxos de Transbordo e Diagnóstico.
+                    </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">-17 p.p</div>
+                            <div class="metric-label">Redução em transbordo</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">+10 p.p</div>
+                            <div class="metric-label">Aumento NPS</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Projeto 5: Curadoria Plusoft -->
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);">📊</div>
+                <div class="project-content">
+                    <span class="project-tag">Plusoft</span>
+                    <h3 class="project-title">Curadoria de Chatbots - Cockpit Cliente</h3>
+                    <p class="project-description">
+                        Análise profunda de dashboards, classificação de IDKs e falsos positivos, investigação de transferências para atendimento humano. Criação de formulário customizado para captura de causas de transferência e geração de PPTs executivos mensais.
+                    </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">70%</div>
+                            <div class="metric-label">Arquitetura de bots criada</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">4</div>
+                            <div class="metric-label">Canais gerenciados</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre">
+        <h2 class="section-title">Sobre Mim</h2>
+        
+        <div class="about-content">
+            <div class="about-image">
+                <img src="foto.jpg" alt="Adriana Cellini">
+            </div>
+            
+            <div class="about-text">
+                <h3>Transformando dados em experiências humanas</h3>
+                <p>
+                    Sou UX Writer com sólida base técnica em Sistemas de Informação e especialização em Design Conversacional e Content Strategy. Minha trajetória profissional une curadoria de conteúdo de chatbots, conversational design e UX Writing, sempre com um objetivo central: <strong>garantir que cada interação seja clara, humana e realmente resolutiva</strong>.
+                </p>
+                <p>
+                    Com mais de 4 anos de experiência, atuo principalmente nos setores financeiro, educacional, telecom, saúde e previdência, tendo trabalhado com marcas como Santander, Fiserv, EnergisaPrev, Kroton, Oi e Dasa.
+                </p>
+                <p>
+                    <strong>Meu diferencial:</strong> uma visão 360° que vai além do texto. Analiso dados, identifico dores, investigo comportamentos e transformo tudo isso em conversas que funcionam. Levei essa expertise da Plusoft ao Santander, onde refinei jornadas em alta escala e impactei diretamente a experiência de milhões de usuários.
+                </p>
+
+                <div class="additional-info">
+                    <h4>💼 Portfólio Completo no Figma</h4>
+                    <p>Além dos projetos destacados, desenvolvi diversas outras jornadas incluindo: Pagamento por Aproximação, Renegociação de Dívidas, Investimentos e múltiplas jornadas de Cartões. Todos os protótipos e fluxos estão documentados no meu Figma.</p>
+                </div>
+
+                <div class="skills">
+                    <span class="skill-tag">UX Writing</span>
+                    <span class="skill-tag">Content Strategy</span>
+                    <span class="skill-tag">Design Conversacional</span>
+                    <span class="skill-tag">Curadoria de IA</span>
+                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag">Análise de Dados</span>
+                    <span class="skill-tag">Metodologias Ágeis</span>
+                    <span class="skill-tag">Arquitetura de Informação</span>
+                    <span class="skill-tag">Benchmarking</span>
+                    <span class="skill-tag">GenAI</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline" style="margin-top: 5rem;">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Julho 2024 - Janeiro 2026</div>
+                    <h3 class="timeline-title">Designer Pleno (UX Writer)</h3>
+                    <div class="timeline-company">NTT DATA Brasil</div>
+                    <p>Gerenciamento e entrega de +150 cards utilizando metodologia ágil, refinamento de jornadas financeiras sensíveis (Pix, Cartões, Investimentos), prototipação no Figma e implementação de melhorias validadas por curadoria.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Agosto 2021 - Julho 2024</div>
+                    <h3 class="timeline-title">Analista de Conteúdo Jr. (UX Writer)</h3>
+                    <div class="timeline-company">Plusoft</div>
+                    <p>Estruturação independente de 70% da arquitetura de novos bots, análise de dashboards, monitoramento de IDKs, e manutenção omnichannel (Web, Mobile, Messenger).</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Janeiro 2006 - Março 2010</div>
+                    <h3 class="timeline-title">Analista de Sistemas Jr.</h3>
+                    <div class="timeline-company">Valid SA</div>
+                    <p>Desenvolvimento e suporte de sistemas em .NET, fornecendo visão técnica que facilita a colaboração atual com desenvolvedores e times de dados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato">
+        <h2 class="section-title">Vamos conversar?</h2>
+        <p style="max-width: 600px; margin: 0 auto 2rem; opacity: 0.95;">
+            Estou sempre aberta a novos desafios e oportunidades. Entre em contato comigo!
+        </p>
+        
+        <div class="contact-links">
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>Email</h3>
+                <a href="mailto:adrianackanashiro@gmail.com">adrianackanashiro@gmail.com</a>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">💼</div>
+                <h3>LinkedIn</h3>
+                <a href="https://linkedin.com/in/adrianackanashiro" target="_blank">linkedin.com/in/adrianackanashiro</a>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">📱</div>
+                <h3>Telefone</h3>
+                <a href="tel:+5511930681982">(11) 93068-1982</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Adriana Cellini Kanashiro

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melhorias nas Jornadas Pix | Adriana Cellini</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --pix-teal: #32BCAD;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--light-gray);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section p, .section li {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .section ul {
+            padding-left: 2rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(50, 188, 173, 0.1), rgba(99, 102, 241, 0.1));
+            border-left: 4px solid var(--pix-teal);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box strong {
+            color: var(--pix-teal);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, var(--pix-teal), #2a9d8f);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(50, 188, 173, 0.2);
+        }
+
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .metric-sublabel {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.3rem;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-side {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .comparison-side h3 {
+            margin-top: 0;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .as-is {
+            border-top: 4px solid var(--warning);
+        }
+
+        .to-be {
+            border-top: 4px solid var(--success);
+        }
+
+        .journey-visual {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border-left: 3px solid var(--pix-teal);
+        }
+
+        .journey-step {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .journey-step::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--pix-teal);
+            font-weight: bold;
+        }
+
+        .gains-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gain-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(50, 188, 173, 0.1));
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--success);
+        }
+
+        .gain-card h4 {
+            color: var(--success);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .gain-card p {
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .image-placeholder {
+            background: var(--light-gray);
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            margin: 2rem 0;
+            border: 2px solid #e5e7eb;
+        }
+
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 600px;
+            width: auto;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html#projetos" class="back-link">← Voltar para o portfólio</a>
+        <h1>Melhorias nas Jornadas Pix</h1>
+        <p class="subtitle">Refinamento de jornadas sensíveis para reduzir transbordo e aumentar NPS</p>
+    </div>
+
+    <div class="container">
+        <!-- Contexto -->
+        <div class="section">
+            <h2>🎯 Contexto e Objetivo</h2>
+            <p>
+                Refinamento de duas jornadas críticas relacionadas ao Pix no chatbot do Santander: <strong>"Precisa de Ajuda?"</strong> e <strong>"Registrar Reclamação Pix"</strong>. O objetivo era utilizar UX Writing estratégico para reduzir o suporte humano, aumentar a resolução no bot e melhorar a experiência geral do cliente.
+            </p>
+            <div class="highlight-box">
+                <strong>Desafio:</strong> As jornadas de Pix são extremamente sensíveis pois envolvem dinheiro e urgência do cliente. Era fundamental criar fluxos que transmitissem empatia, clareza e resolutividade, mantendo o cliente no canal conversacional sempre que possível.
+            </div>
+
+            <p><strong>Foco principal:</strong></p>
+            <ul>
+                <li>Fluxos de Transbordo (quando necessário escalar para humano)</li>
+                <li>Diagnóstico e Melhoria Contínua</li>
+                <li>Redução de fricção na jornada</li>
+                <li>Aumento da resolução no primeiro contato (FCR)</li>
+            </ul>
+        </div>
+
+        <!-- Resultados -->
+        <div class="section">
+            <h2>📊 Resultados Obtidos</h2>
+            <p><strong>Período de análise:</strong> Julho a Outubro</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">+10 p.p</div>
+                    <div class="metric-label">Aumento no NPS</div>
+                    <div class="metric-sublabel">De 33 para 43</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">-118</div>
+                    <div class="metric-label">Redução em registros mensais</div>
+                    <div class="metric-sublabel">Reclamações de Pix</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">64%</div>
+                    <div class="metric-label">FCR</div>
+                    <div class="metric-sublabel">First Contact Resolution</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">-17 p.p</div>
+                    <div class="metric-label">Redução em transbordo</div>
+                    <div class="metric-sublabel">Menos escalações para humano</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ganhos Não Mensuráveis -->
+        <div class="section">
+            <h2>✨ Ganhos Qualitativos</h2>
+            <p>Além dos números, alcançamos melhorias significativas na experiência do usuário:</p>
+
+            <div class="gains-list">
+                <div class="gain-card">
+                    <h4>↗ Aumento em Resolutividade</h4>
+                    <p>Mais clientes conseguem resolver seus problemas sem sair do chatbot</p>
+                </div>
+
+                <div class="gain-card">
+                    <h4>💙 Tratativa Empática e Proativa</h4>
+                    <p>Comunicação mais humanizada em momentos de stress do cliente</p>
+                </div>
+
+                <div class="gain-card">
+                    <h4>📋 Informação Facilitada</h4>
+                    <p>Clareza nas orientações sobre o que fazer em cada situação</p>
+                </div>
+
+                <div class="gain-card">
+                    <h4>🎯 Direcionamento Correto</h4>
+                    <p>Quando necessário, transbordo qualificado para atendimento humano</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jornada 1: Precisa de Ajuda? -->
+        <div class="section">
+            <h2>🔍 Jornada 1: Precisa de Ajuda? Pix</h2>
+            
+            <div class="comparison">
+                <div class="comparison-side as-is">
+                    <h3>
+                        <span>❌</span>
+                        AS IS (Antes)
+                    </h3>
+                    
+                    <div class="image-placeholder">
+                        <img src="pix-as-is-1.png" alt="Jornada AS IS - Precisa de Ajuda Pix">
+                    </div>
+
+                    <div class="journey-visual">
+                        <p><strong>Principais problemas identificados:</strong></p>
+                        <div class="journey-step">Linguagem muito técnica ou "bancarês"</div>
+                        <div class="journey-step">Falta de orientação clara sobre próximos passos</div>
+                        <div class="journey-step">Excesso de opções confundindo o cliente</div>
+                        <div class="journey-step">Transbordo prematuro sem tentar resolver no bot</div>
+                    </div>
+                </div>
+
+                <div class="comparison-side to-be">
+                    <h3>
+                        <span>✅</span>
+                        TO BE (Depois)
+                    </h3>
+                    
+                    <div class="image-placeholder">
+                        <img src="pix-to-be-1.png" alt="Jornada TO BE - Precisa de Ajuda Pix">
+                    </div>
+
+                    <div class="journey-visual">
+                        <p><strong>Melhorias implementadas:</strong></p>
+                        <div class="journey-step">Linguagem clara e acessível</div>
+                        <div class="journey-step">Orientações passo a passo objetivas</div>
+                        <div class="journey-step">Opções simplificadas e priorizadas</div>
+                        <div class="journey-step">Tentativas de resolução no bot antes de transbordar</div>
+                        <div class="journey-step">Tom empático e acolhedor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jornada 2: Registrar Reclamação -->
+        <div class="section">
+            <h2>📝 Jornada 2: Registrar Reclamação Pix</h2>
+            
+            <div class="comparison">
+                <div class="comparison-side as-is">
+                    <h3>
+                        <span>❌</span>
+                        AS IS (Antes)
+                    </h3>
+                    
+                    <div class="image-placeholder">
+                        <img src="pix-as-is-2.png" alt="Jornada AS IS - Registrar Reclamação Pix">
+                    </div>
+
+                    <div class="journey-visual">
+                        <p><strong>Pontos de dor identificados:</strong></p>
+                        <div class="journey-step">Processo burocrático e pouco claro</div>
+                        <div class="journey-step">Cliente não sabia o que esperar</div>
+                        <div class="journey-step">Falta de feedback sobre o andamento</div>
+                        <div class="journey-step">Linguagem fria em momento delicado</div>
+                    </div>
+                </div>
+
+                <div class="comparison-side to-be">
+                    <h3>
+                        <span>✅</span>
+                        TO BE (Depois)
+                    </h3>
+                    
+                    <div class="image-placeholder">
+                        <img src="pix-to-be-2.png" alt="Jornada TO BE - Registrar Reclamação Pix">
+                    </div>
+
+                    <div class="journey-visual">
+                        <p><strong>Soluções aplicadas:</strong></p>
+                        <div class="journey-step">Processo simplificado e transparente</div>
+                        <div class="journey-step">Expectativas claras sobre prazos</div>
+                        <div class="journey-step">Confirmação e comprovante imediatos</div>
+                        <div class="journey-step">Tom empático reconhecendo a frustração</div>
+                        <div class="journey-step">Informações sobre próximos passos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metodologia -->
+        <div class="section">
+            <h2>⚙️ Metodologia de Trabalho</h2>
+            
+            <h3>Processo de Melhoria</h3>
+            <ol style="color: var(--gray); line-height: 1.8;">
+                <li><strong>Análise da jornada atual:</strong> Mapeamento completo do fluxo existente identificando pontos de atrito</li>
+                <li><strong>Análise de dados:</strong> Revisão de métricas de NPS, transbordo, FCR e reclamações</li>
+                <li><strong>Identificação de dores:</strong> Compreensão das frustrações do cliente em cada etapa</li>
+                <li><strong>Prototipação no Figma:</strong> Criação de novos fluxos com microcopy otimizado</li>
+                <li><strong>Validação com time de produto:</strong> Apresentação e discussão das propostas</li>
+                <li><strong>Implementação:</strong> Subida para produção pelo time especialista</li>
+                <li><strong>Monitoramento:</strong> Acompanhamento de métricas pós-implementação</li>
+            </ol>
+
+            <h3>Foco em UX Writing</h3>
+            <p>Cada palavra foi escolhida estrategicamente considerando:</p>
+            <ul>
+                <li><strong>Clareza:</strong> Comunicação direta e sem ambiguidades</li>
+                <li><strong>Empatia:</strong> Reconhecimento da situação do cliente</li>
+                <li><strong>Ação:</strong> CTAs claros sobre o que fazer</li>
+                <li><strong>Concisão:</strong> Informação necessária sem sobrecarga</li>
+                <li><strong>Tom de voz:</strong> Alinhado com a marca Santander</li>
+            </ul>
+        </div>
+
+        <!-- Aprendizados -->
+        <div class="section">
+            <h2>💡 Principais Aprendizados</h2>
+            
+            <div class="highlight-box">
+                <strong>O poder das palavras em momentos críticos:</strong> Em jornadas sensíveis como Pix, onde o cliente está lidando com dinheiro e muitas vezes frustrado, cada palavra importa. A diferença entre "sua solicitação foi negada" e "estamos trabalhando para resolver sua situação" pode definir a experiência.
+            </div>
+
+            <ul>
+                <li><strong>Antecipação resolve:</strong> Antecipar dúvidas e fornecer informações proativamente reduz ansiedade e transbordo</li>
+                <li><strong>Transparência gera confiança:</strong> Explicar prazos e processos claramente aumenta a satisfação mesmo em situações negativas</li>
+                <li><strong>Menos é mais:</strong> Simplificar opções e focar no essencial melhora decisões e reduz fricção</li>
+                <li><strong>Empatia não é opcional:</strong> Reconhecer o sentimento do cliente é fundamental em momentos de stress</li>
+                <li><strong>Dados guiam, mas UX humaniza:</strong> Métricas mostram o problema, mas o UX Writing traz a solução humanizada</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="index.html#projetos" class="back-link" style="color: var(--pix-teal); font-size: 1.1rem; font-weight: 600;">← Voltar para o portfólio</a>
+        </div>
+    </div>
+</body>
+</html>
